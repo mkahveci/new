@@ -43,4 +43,5 @@ exclude:
   - "Gemfile.lock"
 
 projects:
-  - mkahveci/EcoVentures
+#  - mkahveci/EcoVentures
+  - blab/chikv

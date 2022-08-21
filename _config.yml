@@ -41,3 +41,6 @@ exclude:
   - "*.zip"
   - "Gemfile"
   - "Gemfile.lock"
+
+projects:
+  - mkahveci/EcoVentures

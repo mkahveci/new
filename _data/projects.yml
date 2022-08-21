@@ -1,0 +1,31 @@
+---
+- repo: mkahveci/EcoVentures
+  title: EcoVentures
+  owner: mkahveci
+  description: Projects
+  url: "/projects/EcoVentures/"
+  contributors:
+  - login: mkahveci
+    avatar: https://avatars.githubusercontent.com/u/15982517?v=4&s=50
+    url: https://github.com/mkahveci
+  commits:
+  - date: 2022-08-21 04:50:00.000000000 Z
+    message: "Merge remote-tracking branch 'origin/master'\n\n# Conflicts:\n#\tREADME.md"
+    url: https://github.com/mkahveci/EcoVentures/commit/ef7c6b136e4a37036fd632f848705b254d812189
+    author_login: mkahveci
+    author_url: https://github.com/mkahveci
+  - date: 2022-08-21 04:19:16.000000000 Z
+    message: Update
+    url: https://github.com/mkahveci/EcoVentures/commit/e52e322860e38c3896f0205e5d347af51b603184
+    author_login: mkahveci
+    author_url: https://github.com/mkahveci
+  - date: 2022-08-21 04:19:16.000000000 Z
+    message: Update
+    url: https://github.com/mkahveci/EcoVentures/commit/a32f8f76b52b81ea67c1af258844ecfb71b996aa
+    author_login: mkahveci
+    author_url: https://github.com/mkahveci
+  - date: 2022-08-21 04:01:30.000000000 Z
+    message: Initial Commit
+    url: https://github.com/mkahveci/EcoVentures/commit/29db459301f79b1c7bba47a7bdd9ab7369e15212
+    author_login: mkahveci
+    author_url: https://github.com/mkahveci

@@ -3,7 +3,8 @@ description: Science updates on evolution, epidemiology and immunology from the 
 url: 'https://kahveci.pw/new'
 
 markdown: kramdown
-permalink: /:categories/:title/
+#permalink: /:categories/:title/
+permalink: /:title
 future: true
 sass:
   sass_dir: css

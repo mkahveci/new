@@ -1,0 +1,120 @@
+{%- include counter.html -%}
+
+{% if projectcount > 0 %}
+
+{% if page.name == 'Murat Kahveci' %}
+
+## Projects
+
+{% else if %} 
+
+## Joint Projects
+
+Please note that this page includes only joint projects with the kahveci group. {{ page.name }}'s
+    webpage would probably have the complete list of projects.
+
+{% endif %}
+
+{% for project in site.projects reversed %}
+{% if project.contributors contains searchstring %}
+
+__{{projectcount}}__. [{{ project.title }}]({{ project.url }}) ({{ project.duration }})
+
+{% assign projectcount = projectcount | minus: 1 %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+
+{% if count > 0 %}
+{% if page.name == 'Murat Kahveci' %}
+
+## Publications
+
+{% else if %}
+
+## Joint Publications
+
+Please note that this page includes only joint publications with the kahveci group. {{ page.name }}'s
+    webpage would probably have the complete list of publications.
+
+{% endif %}
+{% endif %}
+
+
+{% if booksq == true %}
+
+### Books
+
+{% for book in books reversed %}
+{% if book.authors contains searchstring %}
+
+__{{ count }}__. {{ book.ref }}
+
+{% assign count = count | minus: 1 %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if jpapersq == true %}
+
+### Journal Articles
+
+{% for jpaper in journals reversed %}
+{% if jpaper.authors contains searchstring %}
+
+__{{ count }}__. {{ jpaper.ref }}
+
+{% assign count = count | minus: 1 %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+
+{% if cpapersq == true %}
+
+### Conference Papers
+
+{% for cpaper in conferences reversed %}
+{% if cpaper.authors contains searchstring %}
+
+__{{ count }}__. {{ cpaper.ref }}
+
+{% assign count = count | minus: 1 %}
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if coursecount > 0 %}
+
+## Courses
+
+{% for course in site.courses reversed %}
+{% if course.instructor %}
+{% if page.name == course.instructor %}
+__{{ coursecount }}__. <a href="{{ course.url }}" class="off">{{ course.code }}</a> {{ course.title }}, taught at {{ course.institution }} in {{ course.semester }}.
+    {% endif %}
+    {% endif %}
+    {% assign coursecount = coursecount | minus: 1 %}
+    {% endfor %}
+{% endif %}
+
+{% if postcount > 0 %}
+
+## Posts
+
+{% for post in site.posts %}
+{% if post.author %}
+{% if page.name == post.author %}
+
+__{{ postcount }}__. <a href="{{ post.url }}" class="off">{{ post.title }}</a>
+    <a class="button button--secondary button--pill button--sm" href="{{ post.url }}">{{ post.date | date: "%B %-d, %Y"  }}</a>
+    {% endif %}
+    {% endif %}
+    {% assign postcount = postcount | minus: 1 %}
+    {% endfor %}
+{% endif %}
+

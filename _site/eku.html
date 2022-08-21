@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>Installing Debian 11 as a Main Desktop</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- RSS feed -->
+	<link rel="alternate" type="application/rss+xml" title="Kahveci Group" href="https://kahveci.pw/new/feed.xml">
+
+  <!-- Customized Bootstrap + Font Awesome + Solarized -->
+  <link href="/css/style.css" rel="stylesheet" media="screen">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/images/favicon.png"/>
+
+	<!-- Typekit -->
+	<script>
+	  (function(d) {
+		var config = {
+		  kitId: 'xeu8jut',
+		  scriptTimeout: 3000
+		},
+		h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	  })(document);
+	</script>
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-26244371-2', 'bedford.io');
+		ga('send', 'pageview');
+
+	</script>
+
+	<!-- jQuery -->
+	<script src="/js/jquery.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script src="/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+	<div id="header">
+		<nav class="navbar navbar-expand-md navbar-light bg-navbar">
+			<div class="container">
+				
+				<a class="navbar-brand" href="/">
+					<img class="logo navbar-brand d-inline-block align-top ml-0 mr-1" src="/images/logo.svg">
+					kahveci group
+				</a>
+				
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav nav-pills ml-auto">
+						
+						<li class="nav-link active">
+						
+						<a class="mx-1" href="/blog/">blog</a>
+						</li>
+						
+						<li class="nav-link">
+						
+						<a class="mx-1" href="/papers/">papers</a>
+						</li>
+						
+						<li class="nav-link">
+						
+						<a class="mx-1" href="/projects/">projects</a></li>
+						
+						<li class="nav-link">
+						
+						<a class="mx-1" href="/team/">team</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container mt-4">
+
+	<div class="blog-post">
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			<div class="media">
+				<div class="media-body">
+					<div class="title media-heading">
+						<a href="/eku" class="off">Installing Debian 11 as a Main Desktop</a>
+					</div>
+					<p>
+					<div class="smallhead">
+						3 Aug 2022
+						
+						by <a class="off" href="
+							
+								
+									/murat-kahveci
+								
+							
+						">
+						Murat Kahveci
+						</a>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+
+	<div class="bigspacer"></div>
+
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			
+			<div class="post">
+				<h2 id="introduction">Introduction</h2>
+
+<p><a href="https://www.debian.org/">Debian 11</a> installation can be cumbersome for new Linux users, especially if one plans to use Debian 11 as a main OS to deliver a fully functional desktop environment. This page includes the main steps I prefer as a chemistry professor, while keeping in mind the efficiency of the OS, such as its availability for technical writing, common data analysis tools, and cost-free options.</p>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>On August 1, 2022, during <a href="/uvw">CHEM 102</a> lecture break, I had a conversation with my student on how Linux OS can be efficient for scientific studies. I love Linux OS just because it is free, stable, and there is significant amount of  open-source software available for scientific community. Thus, I hope this page would be helpful for my students, who is willing to try and see a major Linux <a href="https://en.wikipedia.org/wiki/List_of_Linux_distributions">distro</a>: <a href="https://www.debian.org/">Debian 11</a>. Too, I will be using this page for my new installations to speed up the process.</p>
+
+<h3 id="steep-learning-curve">Steep Learning Curve</h3>
+
+<p>When  it comes to switching to a new operating system (OS), it naturally means a steep learning curve. However, learning Linux OS will definitely be a self-rewarding effort. In my experience, I discover new software in Linux environment and try to locate an alternative version for Mac OS or Windows OS (i.e. as office computer alternatives). You can achive many basic tasks in a Linux desktop as a beginner, too.</p>
+
+<h2 id="main-installation">Main Installation</h2>
+
+<p>Downlad latest firware version of Debian: <a href="https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware/">https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware</a>. This link includes non-free firmware to make things easier on some systems requiring proprietary but redistributable firmware. See <a href="http://wiki.debian.org/Firmware">http://wiki.debian.org/Firmware</a> for more details.</p>
+
+<p>This download will be an .ISO image file and requires about 4 GB space. Make a bootable USB drive. <a href="https://www.balena.io/etcher/">balenaEtcher</a> could be very handy in this step.</p>
+
+<h2 id="post-install-instructions">Post-Install Instructions</h2>
+
+<h3 id="add-user-to-sudoers-file">Add user to sudoers file</h3>
+
+<p>Enter <code class="language-plaintext highlighter-rouge">root</code> shell by typing <code class="language-plaintext highlighter-rouge">SU</code> In the Terminal/Konsole.</p>
+
+<p>Verify that <code class="language-plaintext highlighter-rouge">sudo</code> is installed:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install sudo</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Edit sudoers file:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>nano /etc/sudoers
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Add your user below <code class="language-plaintext highlighter-rouge">%sudo</code></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="c"># Allow members of group sudo to execute any command</span>
+%sudo	<span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+matt    <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="enable-contrib-and-non-free-packages">Enable Contrib and Non-Free Packages</h3>
+
+<p>Open main software properties menu using terminal/konsole:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>software-properties-kde
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Enable all listed options containing <code class="language-plaintext highlighter-rouge">MAIN</code>, <code class="language-plaintext highlighter-rouge">CONTRIB</code>,  <code class="language-plaintext highlighter-rouge">NON-FREE</code></p>
+
+<p>If you installed Debian from a pre-built ISO you may need to disabled the <code class="language-plaintext highlighter-rouge">CDROM: Repository</code> to avoid errors. To do this use the <code class="language-plaintext highlighter-rouge">OTHER SOFTWARE</code> tab and make sure <code class="language-plaintext highlighter-rouge">cdrom: is NOT checked</code>.</p>
+
+<p>To enable Update checking, go to the <code class="language-plaintext highlighter-rouge">UPDATES</code> tab and enable <code class="language-plaintext highlighter-rouge">Check for update</code>. As well as any other update options you desire.</p>
+
+<h3 id="adding-backports-repository-optional">Adding Backports Repository (Optional)</h3>
+
+<p>To install an application from the backports repository, you must first add the repository to your system.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>nano /etc/apt/sources.list
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Go to the end of the file and paste the below lines:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>deb http://deb.debian.org/debian/ bullseye-backports main contrib non-free
+deb-src http://deb.debian.org/debian/ bullseye-backports main contrib non-free
+<span class="nb">sudo </span>apt update
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>To install an application from the backport repository, you must specify the source of the package in terminal/konsole.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nt">-t</span> bullseye-backports <span class="nb">install</span> &lt;package name&gt;
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="enable-32-bit-package-downloads-required-for-some-applications">Enable 32-bit Package Downloads (Required for some applications)</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>dpkg <span class="nt">--add-architecture</span> i386
+<span class="nb">sudo </span>apt update
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="find-fastest-mirrors-optional">Find Fastest Mirrors (Optional)</h3>
+
+<p>Install netselect-apt:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>netselect-apt
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Run command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>netselect-apt
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>A list of mirrors ranked by speed will be places in your <code class="language-plaintext highlighter-rouge">home</code> directory
+Copy this list to  <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code></p>
+
+<p>Refresh package index:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-get update
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="snap-and-flatpak-packages">Snap and Flatpak Packages</h3>
+
+<p>Enable support for Snap and Flatpak packages in the <code class="language-plaintext highlighter-rouge">Discover</code> package manager:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>plasma-discover-backend-snap
+<span class="nb">sudo </span>apt <span class="nb">install </span>plasma-discover-backend-flatpak
+flatpak remote-add <span class="nt">--if-not-exists</span> flathub https://flathub.org/repo/flathub.flatpakrepo
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Changes will take effect after <code class="language-plaintext highlighter-rouge">rebooting</code> the system.</p>
+
+<h3 id="basic-package-installers">Basic Package Installers</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>synaptic
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>For Gnome/GTK Desktops use <code class="language-plaintext highlighter-rouge">gdebi</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>gdebi
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>For KDE/QT Desktops use <code class="language-plaintext highlighter-rouge">qapt</code> installer:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>qapt-deb-installer
+<span class="nb">sudo </span>apt <span class="nb">install </span>qapt-utils
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Caution: <code class="language-plaintext highlighter-rouge">qapt</code> sometimes fails to install necessary dependencies.</p>
+
+<h3 id="non-free-codecs-and-other-media-components-optional">Non-free Codecs and Other Media Components (Optional)</h3>
+
+<p>These must be installed seperatly to avoid errors/conflicts.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>ffmpeg
+<span class="nb">sudo </span>apt <span class="nb">install </span>libavcodec-extra
+<span class="nb">sudo </span>apt <span class="nb">install </span>ttf-mscorefonts-installer
+<span class="nb">sudo </span>apt <span class="nb">install </span>libdvdcss2
+<span class="nb">sudo </span>apt <span class="nb">install </span>libdvd-pkg
+<span class="nb">sudo </span>dpkg-reconfigure libdvd-pkg
+<span class="nb">sudo </span>apt <span class="nb">install </span>ffmpegthumbnailer
+<span class="nb">sudo </span>apt <span class="nb">install </span>ffmpegthumbs
+<span class="nb">sudo </span>apt <span class="nb">install </span>gstreamer1.0-plugins-bad
+<span class="nb">sudo </span>apt <span class="nb">install </span>gstreamer1.0-plugins-ugly
+<span class="nb">sudo </span>apt <span class="nb">install </span>gstreamer1.0-libav
+<span class="nb">sudo </span>apt <span class="nb">install </span>gstreamer1.0-tools
+<span class="nb">sudo </span>apt <span class="nb">install </span>gstreamer1.0-vaapi
+<span class="nb">sudo </span>apt <span class="nb">install </span>tumbler-plugins-extra
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>kdegraphics-thumbnailers
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="install-linux-firmware-and-base-packages">Install Linux Firmware and Base Packages</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>firmware-linux firmware-linux-nonfree firmware-misc-nonfree
+<span class="nb">sudo </span>apt <span class="nb">install </span>linux-headers-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span> dkms
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">isenkram-cli</code> package to auto-install missing firmware requested by Kernel.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>isenkram-cli
+<span class="nb">sudo </span>isenkram-autoinstall-firmware
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="utility-applications">Utility Applications</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>rar unrar p7zip-rar
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="fix-qt-themeing-on-gtk-based-desktops">Fix QT Themeing on GTK based Desktops</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>qt5-style-plugins
+<span class="nb">echo</span> <span class="s2">"export QT_QPA_PLATFORMTHEME=gtk2"</span> <span class="o">&gt;&gt;</span> ~/.profile
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Reboot.</p>
+
+<h3 id="install-nvidia-drivers">Install Nvidia Drivers</h3>
+
+<p class="warning">Only use if you have Nvidia Hardware.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>nvidia-detect
+nvidia-detect
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Install the recommended driver shown. Example:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>linux-headers-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span> nvidia-legacy-340xx-driver
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Create an <code class="language-plaintext highlighter-rouge">Xorg</code> configuration for your <code class="language-plaintext highlighter-rouge">gpu</code>.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">mkdir</span> /etc/X11/xorg.conf.d
+nano /etc/X11/xorg.conf.d/20-nvidia.conf
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now add below contents to the file and save.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>Section <span class="s2">"Device"</span>
+Identifier <span class="s2">"My GPU"</span>
+Driver <span class="s2">"nvidia"</span>
+EndSection
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Reboot.</p>
+
+<h3 id="wifi">WiFi</h3>
+
+<p>Install and enable “ALL” Wifi Functions for Broadcom WiFi.</p>
+
+<p>The default non-free firmware only gives you basic functionality. To get the most out of your Brodcom WiFi chip, install the following firmware packages.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>broadcom-sta-dkms broadcom-sta-common firmware-brcm80211
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Reboot.</p>
+
+<h3 id="install-bluetooth-packages">Install Bluetooth Packages</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>bluetooth bluez bluez-firmware bluez-cups bluez-tools firmware-atheros firmware-iwlwifi pulseaudio-module-bluetooth pulseaudio-module-zeroconf
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Reboot.</p>
+
+<h3 id="install-virt-managerqemu-virtual-machine-manager">Install Virt-Manager/QEMU Virtual Machine Manager</h3>
+
+<p>Install on HOST:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>qemu qemu-system qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager libvirt-daemon-system virtinst qemu-utils virt-viewer spice-client-gtk gir1.2-spiceclientgtk-3.0 gir1.2-spiceclientglib-2.0 ebtables
+<span class="nb">sudo </span>virsh net-start default
+<span class="nb">sudo </span>virsh net-autostart default
+<span class="nb">sudo </span>modprobe vhost_net
+<span class="nb">sudo </span>usermod <span class="nt">-G</span> libvirt <span class="nt">-a</span> <span class="nv">$USER</span>
+<span class="nb">sudo </span>usermod <span class="nt">-G</span> kvm <span class="nt">-a</span> <span class="nv">$USER</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Install on Linux GUEST:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>spice-vdagent xserver-xorg-video-qxl xserver-xspice libspice-protocol-dev qemu-guest-agent
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>For Windows GUEST:</p>
+
+<p>install virtio-win-guest-tools.exe, virt-viewer, and UsbDk
+See the folliwing Documentation for instructions.</p>
+
+<ul>
+  <li><a href="https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md">https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md</a></li>
+  <li><a href="https://www.spice-space.org/download.html">https://www.spice-space.org/download.html</a></li>
+</ul>
+
+<h3 id="installing-virtualbox-on-supported-hardware">Installing Virtualbox on Supported Hardware</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>gnupg2
+wget <span class="nt">-q</span> https://www.virtualbox.org/download/oracle_vbox_2016.asc <span class="nt">-O-</span> | <span class="nb">sudo </span>apt-key add -
+wget <span class="nt">-q</span> https://www.virtualbox.org/download/oracle_vbox.asc <span class="nt">-O-</span> | <span class="nb">sudo </span>apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bullseye contrib"</span> | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/virtualbox.list
+<span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>linux-headers-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span> dkms
+<span class="nb">sudo </span>apt <span class="nb">install </span>virtualbox-6.1
+<span class="nb">sudo </span>gpasswd <span class="nt">-a</span> <span class="nv">$USER</span> vboxusers
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Download Guest Additions here:
+<a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
+
+<h3 id="improve-font-rendering-in-debian-optional">Improve Font Rendering in Debian (Optional)</h3>
+
+<p>Show hidden files in file manager.</p>
+
+<p>Create file <code class="language-plaintext highlighter-rouge">/home/user/.fonts.conf</code></p>
+
+<p>Copy and paste the following text into file:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="code"><pre>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s1">'1.0'</span>?&gt;
+&lt;<span class="o">!</span>DOCTYPE fontconfig SYSTEM <span class="s1">'fonts.dtd'</span><span class="o">&gt;</span>
+&lt;fontconfig&gt;
+ &lt;match <span class="nv">target</span><span class="o">=</span><span class="s2">"font"</span><span class="o">&gt;</span>
+  &lt;edit <span class="nv">mode</span><span class="o">=</span><span class="s2">"assign"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"rgba"</span><span class="o">&gt;</span>
+   &lt;const&gt;rgb&lt;/const&gt;
+  &lt;/edit&gt;
+ &lt;/match&gt;
+ &lt;match <span class="nv">target</span><span class="o">=</span><span class="s2">"font"</span><span class="o">&gt;</span>
+  &lt;edit <span class="nv">mode</span><span class="o">=</span><span class="s2">"assign"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"hinting"</span><span class="o">&gt;</span>
+   &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+ &lt;/match&gt;
+ &lt;match <span class="nv">target</span><span class="o">=</span><span class="s2">"font"</span><span class="o">&gt;</span>
+  &lt;edit <span class="nv">mode</span><span class="o">=</span><span class="s2">"assign"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"hintstyle"</span><span class="o">&gt;</span>
+   &lt;const&gt;hintslight&lt;/const&gt;
+  &lt;/edit&gt;
+ &lt;/match&gt;
+ &lt;match <span class="nv">target</span><span class="o">=</span><span class="s2">"font"</span><span class="o">&gt;</span>
+  &lt;edit <span class="nv">mode</span><span class="o">=</span><span class="s2">"assign"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"antialias"</span><span class="o">&gt;</span>
+   &lt;bool&gt;true&lt;/bool&gt;
+  &lt;/edit&gt;
+ &lt;/match&gt;
+  &lt;match <span class="nv">target</span><span class="o">=</span><span class="s2">"font"</span><span class="o">&gt;</span>
+    &lt;edit <span class="nv">mode</span><span class="o">=</span><span class="s2">"assign"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"lcdfilter"</span><span class="o">&gt;</span>
+      &lt;const&gt;lcddefault&lt;/const&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;
+&lt;/fontconfig&gt;
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Reboot.</p>
+
+<h3 id="open-kde-settings-as-root">Open KDE Settings as Root</h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>pkexec <span class="nb">env </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span> <span class="nv">XAUTHORITY</span><span class="o">=</span><span class="nv">$XAUTHORITY</span> <span class="nv">KDE_SESSION_VERSION</span><span class="o">=</span>5 <span class="nv">KDE_FULL_SESSION</span><span class="o">=</span><span class="nb">true </span>dbus-launch systemsettings5
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="hide-partitions-on-boot-optional">Hide Partitions on Boot (Optional)</h3>
+
+<p>Create a new file <code class="language-plaintext highlighter-rouge">/etc/udev/rules.d/99-hide-partitions.rules</code> and add one line per partition you want to hide like so:
+(change “sda*” to match the partition you wish to hide)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nv">KERNEL</span><span class="o">==</span><span class="s2">"sda1"</span>,ENV<span class="o">{</span>UDISKS_IGNORE<span class="o">}=</span><span class="s2">"1"</span>
+<span class="nv">KERNEL</span><span class="o">==</span><span class="s2">"sda2"</span>,ENV<span class="o">{</span>UDISKS_IGNORE<span class="o">}=</span><span class="s2">"1"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>You should be able to dynamically activate it as root:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="c"># udevadm trigger --verbose</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="backup--restore-installed-apt-packages">Backup / Restore installed APT packages</h3>
+
+<p>Backup your packages list to your home directory. Get a packages list:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>dpkg <span class="nt">--get-selections</span> <span class="o">&gt;</span> ~/Package.list
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Copy list of repositories to your home directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo cp</span> /etc/apt/sources.list ~/sources.list
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Export repo keys to your home directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-key exportall <span class="o">&gt;</span> ~/Repo.keys
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Restore packages from your home directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt-key add ~/Repo.keys
+<span class="nb">sudo cp</span> ~/sources.list /etc/apt/sources.list
+<span class="nb">sudo </span>dpkg <span class="nt">--add-architecture</span> i386
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>dselect
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="si">$(</span><span class="nb">cat</span> ~/Package.list | <span class="nb">awk</span> <span class="s1">'{print $1}'</span><span class="si">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>NOTE: if SUDO is not configured, Simply use root terminal or SU.</p>
+
+<p>CRITICAL: Any packages installed using a .DEB file or other source not
+included in your repositories/sources.list, must be removed from Package.list before restoring to avoid errors. These packages will need to be reinstalled manually.</p>
+
+<h3 id="install-microcode">Install <code class="language-plaintext highlighter-rouge">microcode</code></h3>
+
+<p>Microcode is CPU firmware that controls how the processor works. It’s recommended to have the latest microcode to improve your CPU workings.</p>
+
+<p>Open Synaptic Package Manager &gt; Search for <code class="language-plaintext highlighter-rouge">microcode</code> &gt; Install either intel-microcode or amd-microcode depending on your CPU.</p>
+
+<h3 id="configure-swappiness">Configure Swappiness</h3>
+
+<p>Decreasing <code class="language-plaintext highlighter-rouge">swappiness</code> value is one of the best ways to improve the performance of your system. This forces your Linux system to use RAM, instead of the hard drive. For those of you unfamiliar with Linux swap, check out our post on Linux swap.</p>
+
+<p>Check the current <code class="language-plaintext highlighter-rouge">swappiness</code> value by executing:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">cat</span> /proc/sys/vm/swappiness
+<span class="c"># 60 (default)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Open <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> file as an administrator:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nb">sudo </span>nano /etc/sysctl.conf
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>At the end of the file, add <code class="language-plaintext highlighter-rouge">vm.swappiness=10</code> which will reduce swap usage.</p>
+
+<p>Press CTRL + O to save changes and CTRL + X to exit the nano editor.</p>
+
+<p>Reboot.</p>
+
+<h3 id="install-firewall">Install Firewall</h3>
+
+<p>Although there are not many viruses for Linux, it’s advisable to have a firewall that protects against network intrusions.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>ufw
+<span class="nb">sudo </span>ufw <span class="nb">enable</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We also have a dedicated post on the firewall in Linux so make sure to check it out for more advanced usage.</p>
+
+<h3 id="install-backup-program">Install BackUp Program</h3>
+
+<p>BackUp programs are often overlooked. That is also the case with Debian 11 which doesn’t have backups by default. I always back up my system and good backups have saved me a few times!</p>
+
+<p><code class="language-plaintext highlighter-rouge">Timeshift</code> is the gold standard for system backups in Linux. It’s also very easy to install and configure.</p>
+
+<p>Open <code class="language-plaintext highlighter-rouge">Software Center &gt; Search for Timeshift &gt; Click Install</code></p>
+
+<p>Upon opening the Timeshift, you’ll probably notice the Wizard button in the top right side of the app. As the name suggests, this is a user-friendly way of configuring backup.</p>
+
+<p>Run Wizard and follow these steps:</p>
+
+<ol>
+  <li>Snapshot Type: Select <code class="language-plaintext highlighter-rouge">RSYNC</code></li>
+  <li>Snapshot Location: Select the disk where you would like your snapshots to be stored.</li>
+  <li>Snapshot Levels: You can choose how many snapshots Timeshift will perform/store on a monthly, weekly, daily, hourly and boot basis.</li>
+  <li>User home directories: Allows you to decide which folders Timeshift will back up. You should prioritize your <code class="language-plaintext highlighter-rouge">home</code> directory, but depending on your space, it won’t hurt to include <code class="language-plaintext highlighter-rouge">/root</code> directory as well.</li>
+</ol>
+
+<p>That’s it for Timeshift! In case you accidentally lose your data, open Timeshift, click Restore, select a snapshot that contains the files that you would like to recover and that’s it!</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li>Matthew Moore - Tech Café. <a href="https://www.youtube.com/watch?v=Twrh0hpJieA">Things you should do after installing Debian 11 KDE</a>. Retrieved on 8/3/2022.</li>
+  <li>Average Linux User. <a href="https://averagelinuxuser.com/debian-11-after-install">20 Essentials Things to Do After Installing Debian 11</a>. Retrieved on 8/3/2022.</li>
+</ol>
+
+
+			</div>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+
+	<div class="bigspacer"></div>
+	<div class="spacer"></div>
+
+</div>
+
+
+	</div>
+
+	<div id="footer"><span style="display:none">foo</span></div>
+
+</body>
+</html>

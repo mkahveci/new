@@ -1,0 +1,5 @@
+> <a href="{{ page.insturl }}"><img class="image image--sm" src="{{ page.cover }}"/></a>
+> <p><i class="fas fa-info-circle"></i> {{ page.code }} {{ page.title }} ({{ page.clevel | downcase }} level) was taught by
+<a href="{{ page.instructorurl }}">{{ page.instructor }}</a>
+at {{ page.institution }} in {{ page.semester }}. {% if page.web %} <a class="button button--outline-warning button--pill button--xs" href="{{ page.web }}">{{ page.code }} Course URL</a>
+    {% endif %}</p>

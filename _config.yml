@@ -1,6 +1,7 @@
-name: Bedford Lab Research
+name: Kahveci Group
 description: Science updates on evolution, epidemiology and immunology from the Bedford lab at the Fred Hutch
-url: https://kahveci.pw/new
+baseurl: /new
+url: https://kahveci.pw
 
 markdown: kramdown
 permalink: /:categories/:title/

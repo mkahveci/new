@@ -7,14 +7,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- RSS feed -->
-	<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+	{% if site.baseurl != null and site.baseurl != "" %}
+	  <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.baseurl }}/feed.xml">
+	{% else %}
+	  <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+	{% endif %}
+
 
   <!-- Customized Bootstrap + Font Awesome + Solarized -->
-  <link href="/css/style.css" rel="stylesheet" media="screen">
+	{% if site.baseurl != null and site.baseurl != "" %}
+	  <link href="{{ site.baseurl }}/css/style.css" rel="stylesheet" media="screen">
+	{% else %}
+	  <link href="/css/style.css" rel="stylesheet" media="screen">
+	{% endif %}
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="/images/favicon.png"/>
-
+	{% if site.baseurl != null and site.baseurl != "" %}
+	  <link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon.png"/>
+	{% else %}
+	  <link rel="shortcut icon" href="/images/favicon.png"/>
+	{% endif %}
 	<!-- Typekit -->
 	<script>
 	  (function(d) {
@@ -38,16 +50,75 @@
 
 	</script>
 
-	<!-- jQuery -->
-	<script src="/js/jquery.min.js"></script>
 
-	<!-- Bootstrap -->
-	<script src="/js/bootstrap.min.js"></script>
+
+
+	{% if site.baseurl != null and site.baseurl != "" %}
+	<!-- jQuery -->
+	  <script src="{{ site.baseurl }}/js/jquery.min.js"></script>
+  	  <!-- Bootstrap -->
+	  <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
+	{% else %}
+		<!-- jQuery -->
+	  <script src="/js/jquery.min.js"></script>
+  	  <!-- Bootstrap -->
+	  <script src="/js/bootstrap.min.js"></script>
+	{% endif %}
 
 </head>
 
 <body>
 
+	{% if site.baseurl != null and site.baseurl != "" %}
+	<div id="header">
+		<nav class="navbar navbar-expand-md navbar-light bg-navbar">
+			<div class="container">
+				{% if page.categories.first != 'home' %}
+				<a class="navbar-brand" href="{{ site.baseurl }}/">
+					<img class="logo navbar-brand d-inline-block align-top ml-0 mr-1" src="{{ site.baseurl }}/images/logo.svg">
+					bedford lab
+				</a>
+				{% else %}
+				<a class="navbar-brand" href="{{ site.baseurl }}/">
+				</a>
+				{% endif %}
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav nav-pills ml-auto">
+						{% if page.categories.first == 'blog' %}
+						<li class="nav-link active">
+						{% else %}
+						<li class="nav-link">
+						{% endif %}
+						<a class="mx-1" href="{{ site.baseurl }}/blog/">blog</a>
+						</li>
+						{% if page.categories.first == 'papers' %}
+						<li class="nav-link active">
+						{% else %}
+						<li class="nav-link">
+						{% endif %}
+						<a class="mx-1" href="{{ site.baseurl }}/papers/">papers</a>
+						</li>
+						{% if page.categories.first == 'projects' %}
+						<li class="nav-link active">
+						{% else %}
+						<li class="nav-link">
+						{% endif %}
+						<a class="mx-1" href="{{ site.baseurl }}/projects/">projects</a></li>
+						{% if page.categories.first == 'team' %}
+						<li class="nav-link active">
+						{% else %}
+						<li class="nav-link">
+						{% endif %}
+						<a class="mx-1" href="{{ site.baseurl }}/team/">team</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	{% else %}
 	<div id="header">
 		<nav class="navbar navbar-expand-md navbar-light bg-navbar">
 			<div class="container">
@@ -96,6 +167,8 @@
 			</div>
 		</nav>
 	</div>
+	{% endif %}
+
 
 	<div class="container mt-4">
 

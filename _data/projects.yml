@@ -1,5 +1,8 @@
 ---
 - repo: blab/chikv
+  with:
+    submodules: recursive
+    token: ${{ secrets.A_SECRET_TOKEN}}
   title: chikv
   owner: blab
   description: Evolutionary dynamics of chikungunya virus
